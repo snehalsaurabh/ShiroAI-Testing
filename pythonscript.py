@@ -1,4 +1,9 @@
-import PyPDF2
+import sys
+try:
+    import PyPDF2
+except ImportError:
+    print("Error: PyPDF2 is not installed. Run `pip install -r requirements.txt` and try again.")
+    sys.exit(1)
 
 reader = PyPDF2.PdfReader("national income.pdf")
 text = "\n".join(page.extract_text() for page in reader.pages)
@@ -14,6 +19,3 @@ for line in lines:
 # write to a new text file
 with open("questions_only.txt", "w") as f:
     f.write("\n".join(output))
-
-
-
